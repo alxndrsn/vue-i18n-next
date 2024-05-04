@@ -1462,16 +1462,6 @@ describe.only('#TODO', async () => {
 
               expect(i18n.global.te(k)).toEqual(true)
             })
-
-            it('should return true with locale', () => {
-              const k = prop
-
-              const i18n = i18nFor({
-                [prop]: 'hi'
-              })
-
-              expect(i18n.global.te(k, 'en')).toEqual(true)
-            })
           })
 
           describe('t()', () => {
@@ -1484,16 +1474,6 @@ describe.only('#TODO', async () => {
 
               expect(i18n.global.t(k)).toEqual('hi')
             })
-
-            it('should return hi with locale', () => {
-              const k = prop
-
-              const i18n = i18nFor({
-                [prop]: 'hi'
-              })
-
-              expect(i18n.global.t(k, 'en')).toEqual('hi')
-            })
           })
         })
 
@@ -1505,13 +1485,6 @@ describe.only('#TODO', async () => {
 
               expect(i18n.global.te(k)).toEqual(false)
             })
-
-            it('should return false with locale', () => {
-              const k = prop
-              const i18n = i18nFor({})
-
-              expect(i18n.global.te(k, 'en')).toEqual(false)
-            })
           })
 
           describe('t()', () => {
@@ -1520,13 +1493,6 @@ describe.only('#TODO', async () => {
               const i18n = i18nFor({})
 
               expect(i18n.global.t(k)).toEqual(k)
-            })
-
-            it('should return key with locale', () => {
-              const k = prop
-              const i18n = i18nFor({})
-
-              expect(i18n.global.t(k, 'en')).toEqual(k)
             })
           })
         })
@@ -1548,20 +1514,6 @@ describe.only('#TODO', async () => {
 
               expect(i18n.global.te(k)).toEqual(true)
             })
-
-            it('should return true with locale', () => {
-              const k = `a.${prop}.c`
-
-              const i18n = i18nFor({
-                a: {
-                  [prop]: {
-                    c: 'hi'
-                  }
-                }
-              })
-
-              expect(i18n.global.te(k, 'en')).toEqual(true)
-            })
           })
 
           describe('t()', () => {
@@ -1578,20 +1530,6 @@ describe.only('#TODO', async () => {
 
               expect(i18n.global.t(k)).toEqual('hi')
             })
-
-            it('should return hi with locale', () => {
-              const k = `a.${prop}.c`
-
-              const i18n = i18nFor({
-                a: {
-                  [prop]: {
-                    c: 'hi'
-                  }
-                }
-              })
-
-              expect(i18n.global.t(k, 'en')).toEqual('hi')
-            })
           })
         })
 
@@ -1604,14 +1542,6 @@ describe.only('#TODO', async () => {
 
               expect(i18n.global.te(k)).toEqual(false)
             })
-
-            it('should return false with locale', () => {
-              const k = `a.${prop}.c`
-
-              const i18n = i18nFor({})
-
-              expect(i18n.global.te(k, 'en')).toEqual(false)
-            })
           })
 
           describe('t()', () => {
@@ -1621,14 +1551,6 @@ describe.only('#TODO', async () => {
               const i18n = i18nFor({})
 
               expect(i18n.global.t(k)).toEqual(k)
-            })
-
-            it('should return key with locale', () => {
-              const k = `a.${prop}.c`
-
-              const i18n = i18nFor({})
-
-              expect(i18n.global.t(k, 'en')).toEqual(k)
             })
           })
         })
@@ -1648,18 +1570,6 @@ describe.only('#TODO', async () => {
 
               expect(i18n.global.te(k)).toEqual(true)
             })
-
-            it('should return true with locale', () => {
-              const k = `a.${prop}`
-
-              const i18n = i18nFor({
-                a: {
-                  [prop]: 'hi'
-                }
-              })
-
-              expect(i18n.global.te(k, 'en')).toEqual(true)
-            })
           })
 
           describe('t()', () => {
@@ -1674,18 +1584,6 @@ describe.only('#TODO', async () => {
 
               expect(i18n.global.t(k)).toEqual('hi')
             })
-
-            it('should return hi with locale', () => {
-              const k = `a.${prop}`
-
-              const i18n = i18nFor({
-                a: {
-                  [prop]: 'hi'
-                }
-              })
-
-              expect(i18n.global.t(k, 'en')).toEqual('hi')
-            })
           })
         })
 
@@ -1698,14 +1596,6 @@ describe.only('#TODO', async () => {
 
               expect(i18n.global.te(k)).toEqual(false)
             })
-
-            it('should return key with locale', () => {
-              const k = `a.${prop}`
-
-              const i18n = i18nFor({})
-
-              expect(i18n.global.te(k, 'en')).toEqual(false)
-            })
           })
 
           describe('t()', () => {
@@ -1715,14 +1605,6 @@ describe.only('#TODO', async () => {
               const i18n = i18nFor({})
 
               expect(i18n.global.t(k)).toEqual(k)
-            })
-
-            it('should return key with locale', () => {
-              const k = `a.${prop}`
-
-              const i18n = i18nFor({})
-
-              expect(i18n.global.t(k, 'en')).toEqual(k)
             })
           })
         })
