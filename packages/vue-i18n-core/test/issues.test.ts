@@ -1439,15 +1439,15 @@ describe.only('#TODO', async () => {
     })
 
   ;[
+    'control', // use this for making sure the tests are written correctly
     // '__proto__', // TODO: see __link to __proto__ issue if appropriate
-    //'constructor',
-    //'hasOwnProperty',
-    //'isPrototypeOf',
-    //'propertyIsEnumerable',
-    //'toLocaleString',
-    //'toString',
-    //'valueOf',
-    'control' // use this for making sure the tests are written correctly
+    'constructor',
+    'hasOwnProperty',
+    'isPrototypeOf',
+    'propertyIsEnumerable',
+    'toLocaleString',
+    'toString',
+    'valueOf',
   ].forEach(prop => {
     describe(prop, () => {
       describe('top-level props', () => {
