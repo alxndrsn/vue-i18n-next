@@ -1428,3 +1428,137 @@ test('#1809', async () => {
   })
   expect(i18n.global.t('hi')).toEqual('hi kazupon')
 })
+
+describe('#TODO', async () => {
+	const i18nFor = messages => createI18n({
+    locale: 'en',
+    messages: {
+      en: messages
+		}
+	});
+
+  [
+    // '__proto__', // TODO: see __link to __proto__ issue if appropriate
+    'constructor',
+    'hasOwnProperty',
+    'isPrototypeOf',
+    'propertyIsEnumerable',
+    'toLocaleString',
+    'toString',
+    'valueOf',
+  ].forEach(k => {
+    describe('top-level props', () => {
+      describe('with existing key', () => {
+				const i18n = i18nFor({
+					[k]: 'hi',
+				})
+				
+				describe('te()', () => {
+					it('should return true', () => {
+						expect(i18n.global.t(k)).toEqual(true)
+					})
+
+					it('should return true with locale', () => {
+						expect(i18n.global.t(k, en)).toEqual(true)
+					})
+				})
+				
+				describe('t()', () => {
+					it('should return hi', () => {
+						expect(i18n.global.t(k)).toEqual('hi')
+					})
+
+					it('should return hi with locale', () => {
+						expect(i18n.global.t(k, en)).toEqual('hi')
+					})
+				})
+      })
+
+      describe('with not existing key', () => {
+				const i18n = i18nFor({})
+
+				describe('te()', () => {
+					it('should return false', () => {
+						expect(i18n.global.te(k)).toEqual(false)
+					})
+
+					it('should return false with locale', () => {
+						expect(i18n.global.te(k, en)).toEqual(false)
+					})
+				})
+
+				describe('t()', () => {
+					it('should return false', () => {
+						expect(i18n.global.t(k)).toEqual(false)
+					})
+
+					it('should return false with locale', () => {
+						expect(i18n.global.t(k, en)).toEqual(false)
+					})
+				})
+      })
+    })
+
+    describe('mid-level props', () => {
+      describe('with existing key', () => {
+				const i18n = i18nFor({
+					a: {
+					  [k]: {
+							c: 'hi',
+						}
+					}
+				})
+				
+        it('should return true', () => {
+  				expect(i18n.global.te(`a.${k}.c`)).toEqual(true)
+        })
+
+        it('should return true with locale', () => {
+  				expect(i18n.global.te(`a.${k}.c`, en)).toEqual(true)
+        })
+      })
+
+      describe('with not existing key', () => {
+				const i18n = i18nFor({})
+				
+				it('should return false', () => {
+  				expect(i18n.global.te(`a.${k}.c`)).toEqual(false)
+        })
+
+				it('should return false with locale', () => {
+  				expect(i18n.global.te(`a.${k}.c`, en)).toEqual(false)
+        })
+      })
+    })
+
+    describe('deep props', () => {
+      describe('with existing key', () => {
+				const i18n = i18nFor({
+					a: {
+					  [k]: 'hi',
+					}
+				})
+				
+        it('should return true', () => {
+  				expect(i18n.global.te(`a.${k}`)).toEqual(true)
+        })
+
+        it('should return true with locale', () => {
+  				expect(i18n.global.te(`a.${k}`, en)).toEqual(true)
+        })
+      })
+
+      describe('with not existing key', () => {
+				const i18n = i18nFor({})
+				
+				it('should return false', () => {
+  				expect(i18n.global.te(`a.${k}`)).toEqual(false)
+        })
+
+				it('should return false with locale', () => {
+  				expect(i18n.global.te(`a.${k}`, en)).toEqual(false)
+        })
+      })
+    })
+  });
+});
