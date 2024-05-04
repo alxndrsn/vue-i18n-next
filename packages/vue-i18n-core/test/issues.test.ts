@@ -1429,136 +1429,304 @@ test('#1809', async () => {
   expect(i18n.global.t('hi')).toEqual('hi kazupon')
 })
 
-describe('#TODO', async () => {
-  const i18nFor = messages => createI18n({
-    locale: 'en',
-    messages: {
-      en: messages
-    }
-  });
+describe.only('#TODO', async () => {
+  const i18nFor = messages =>
+    createI18n({
+      locale: 'en',
+      messages: {
+        en: messages
+      }
+    })
 
-  [
+  ;[
     // '__proto__', // TODO: see __link to __proto__ issue if appropriate
-    'constructor',
-    'hasOwnProperty',
-    'isPrototypeOf',
-    'propertyIsEnumerable',
-    'toLocaleString',
-    'toString',
-    'valueOf',
-  ].forEach(k => {
-    describe('top-level props', () => {
-      describe('with existing key', () => {
-        const i18n = i18nFor({
-          [k]: 'hi',
+    //'constructor',
+    //'hasOwnProperty',
+    //'isPrototypeOf',
+    //'propertyIsEnumerable',
+    //'toLocaleString',
+    //'toString',
+    //'valueOf',
+    'control' // use this for making sure the tests are written correctly
+  ].forEach(prop => {
+    describe(prop, () => {
+      describe('top-level props', () => {
+        describe('with existing key', () => {
+          describe('te()', () => {
+            it('should return true', () => {
+              const k = prop
+
+              const i18n = i18nFor({
+                [prop]: 'hi'
+              })
+
+              expect(i18n.global.te(k)).toEqual(true)
+            })
+
+            it('should return true with locale', () => {
+              const k = prop
+
+              const i18n = i18nFor({
+                [prop]: 'hi'
+              })
+
+              expect(i18n.global.te(k, 'en')).toEqual(true)
+            })
+          })
+
+          describe('t()', () => {
+            it('should return hi', () => {
+              const k = prop
+
+              const i18n = i18nFor({
+                [prop]: 'hi'
+              })
+
+              expect(i18n.global.t(k)).toEqual('hi')
+            })
+
+            it('should return hi with locale', () => {
+              const k = prop
+
+              const i18n = i18nFor({
+                [prop]: 'hi'
+              })
+
+              expect(i18n.global.t(k, 'en')).toEqual('hi')
+            })
+          })
         })
 
-        describe('te()', () => {
-          it('should return true', () => {
-            expect(i18n.global.t(k)).toEqual(true)
+        describe('with not existing key', () => {
+          describe('te()', () => {
+            it('should return false', () => {
+              const k = prop
+              const i18n = i18nFor({})
+
+              expect(i18n.global.te(k)).toEqual(false)
+            })
+
+            it('should return false with locale', () => {
+              const k = prop
+              const i18n = i18nFor({})
+
+              expect(i18n.global.te(k, 'en')).toEqual(false)
+            })
           })
 
-          it('should return true with locale', () => {
-            expect(i18n.global.t(k, 'en')).toEqual(true)
-          })
-        })
+          describe('t()', () => {
+            it('should return key', () => {
+              const k = prop
+              const i18n = i18nFor({})
 
-        describe('t()', () => {
-          it('should return hi', () => {
-            expect(i18n.global.t(k)).toEqual('hi')
-          })
+              expect(i18n.global.t(k)).toEqual(k)
+            })
 
-          it('should return hi with locale', () => {
-            expect(i18n.global.t(k, 'en')).toEqual('hi')
+            it('should return key with locale', () => {
+              const k = prop
+              const i18n = i18nFor({})
+
+              expect(i18n.global.t(k, 'en')).toEqual(k)
+            })
           })
         })
       })
 
-      describe('with not existing key', () => {
-        const i18n = i18nFor({})
+      describe('mid-level props', () => {
+        describe('with existing key', () => {
+          describe('te()', () => {
+            it('should return true', () => {
+              const k = `a.${prop}.c`
 
-        describe('te()', () => {
-          it('should return false', () => {
-            expect(i18n.global.te(k)).toEqual(false)
+              const i18n = i18nFor({
+                a: {
+                  [prop]: {
+                    c: 'hi'
+                  }
+                }
+              })
+
+              expect(i18n.global.te(k)).toEqual(true)
+            })
+
+            it('should return true with locale', () => {
+              const k = `a.${prop}.c`
+
+              const i18n = i18nFor({
+                a: {
+                  [prop]: {
+                    c: 'hi'
+                  }
+                }
+              })
+
+              expect(i18n.global.te(k, 'en')).toEqual(true)
+            })
           })
 
-          it('should return false with locale', () => {
-            expect(i18n.global.te(k, 'en')).toEqual(false)
+          describe('t()', () => {
+            it('should return hi', () => {
+              const k = `a.${prop}.c`
+
+              const i18n = i18nFor({
+                a: {
+                  [prop]: {
+                    c: 'hi'
+                  }
+                }
+              })
+
+              expect(i18n.global.t(k)).toEqual('hi')
+            })
+
+            it('should return hi with locale', () => {
+              const k = `a.${prop}.c`
+
+              const i18n = i18nFor({
+                a: {
+                  [prop]: {
+                    c: 'hi'
+                  }
+                }
+              })
+
+              expect(i18n.global.t(k, 'en')).toEqual('hi')
+            })
           })
         })
 
-        describe('t()', () => {
-          it('should return false', () => {
-            expect(i18n.global.t(k)).toEqual(false)
+        describe('with not existing key', () => {
+          describe('te()', () => {
+            it('should return false', () => {
+              const k = `a.${prop}.c`
+
+              const i18n = i18nFor({})
+
+              expect(i18n.global.te(k)).toEqual(false)
+            })
+
+            it('should return false with locale', () => {
+              const k = `a.${prop}.c`
+
+              const i18n = i18nFor({})
+
+              expect(i18n.global.te(k, 'en')).toEqual(false)
+            })
           })
 
-          it('should return false with locale', () => {
-            expect(i18n.global.t(k, 'en')).toEqual(false)
+          describe('t()', () => {
+            it('should return key', () => {
+              const k = `a.${prop}.c`
+
+              const i18n = i18nFor({})
+
+              expect(i18n.global.t(k)).toEqual(k)
+            })
+
+            it('should return key with locale', () => {
+              const k = `a.${prop}.c`
+
+              const i18n = i18nFor({})
+
+              expect(i18n.global.t(k, 'en')).toEqual(k)
+            })
+          })
+        })
+      })
+
+      describe('deep props', () => {
+        describe('with existing key', () => {
+          describe('te()', () => {
+            it('should return true', () => {
+              const k = `a.${prop}`
+
+              const i18n = i18nFor({
+                a: {
+                  [prop]: 'hi'
+                }
+              })
+
+              expect(i18n.global.te(k)).toEqual(true)
+            })
+
+            it('should return true with locale', () => {
+              const k = `a.${prop}`
+
+              const i18n = i18nFor({
+                a: {
+                  [prop]: 'hi'
+                }
+              })
+
+              expect(i18n.global.te(k, 'en')).toEqual(true)
+            })
+          })
+
+          describe('t()', () => {
+            it('should return hi', () => {
+              const k = `a.${prop}`
+
+              const i18n = i18nFor({
+                a: {
+                  [prop]: 'hi'
+                }
+              })
+
+              expect(i18n.global.t(k)).toEqual('hi')
+            })
+
+            it('should return hi with locale', () => {
+              const k = `a.${prop}`
+
+              const i18n = i18nFor({
+                a: {
+                  [prop]: 'hi'
+                }
+              })
+
+              expect(i18n.global.t(k, 'en')).toEqual('hi')
+            })
+          })
+        })
+
+        describe('with not existing key', () => {
+          describe('te()', () => {
+            it('should return false', () => {
+              const k = `a.${prop}`
+
+              const i18n = i18nFor({})
+
+              expect(i18n.global.te(k)).toEqual(false)
+            })
+
+            it('should return key with locale', () => {
+              const k = `a.${prop}`
+
+              const i18n = i18nFor({})
+
+              expect(i18n.global.te(k, 'en')).toEqual(false)
+            })
+          })
+
+          describe('t()', () => {
+            it('should return key', () => {
+              const k = `a.${prop}`
+
+              const i18n = i18nFor({})
+
+              expect(i18n.global.t(k)).toEqual(k)
+            })
+
+            it('should return key with locale', () => {
+              const k = `a.${prop}`
+
+              const i18n = i18nFor({})
+
+              expect(i18n.global.t(k, 'en')).toEqual(k)
+            })
           })
         })
       })
     })
-
-    describe('mid-level props', () => {
-      describe('with existing key', () => {
-        const i18n = i18nFor({
-          a: {
-            [k]: {
-              c: 'hi',
-            }
-          }
-        })
-
-        it('should return true', () => {
-          expect(i18n.global.te(`a.${k}.c`)).toEqual(true)
-        })
-
-        it('should return true with locale', () => {
-          expect(i18n.global.te(`a.${k}.c`, 'en')).toEqual(true)
-        })
-      })
-
-      describe('with not existing key', () => {
-        const i18n = i18nFor({})
-
-        it('should return false', () => {
-          expect(i18n.global.te(`a.${k}.c`)).toEqual(false)
-        })
-
-        it('should return false with locale', () => {
-          expect(i18n.global.te(`a.${k}.c`, 'en')).toEqual(false)
-        })
-      })
-    })
-
-    describe('deep props', () => {
-      describe('with existing key', () => {
-        const i18n = i18nFor({
-          a: {
-            [k]: 'hi',
-          }
-        })
-
-        it('should return true', () => {
-          expect(i18n.global.te(`a.${k}`)).toEqual(true)
-        })
-
-        it('should return true with locale', () => {
-          expect(i18n.global.te(`a.${k}`, 'en')).toEqual(true)
-        })
-      })
-
-      describe('with not existing key', () => {
-        const i18n = i18nFor({})
-
-        it('should return false', () => {
-          expect(i18n.global.te(`a.${k}`)).toEqual(false)
-        })
-
-        it('should return false with locale', () => {
-          expect(i18n.global.te(`a.${k}`, 'en')).toEqual(false)
-        })
-      })
-    })
-  });
-});
+  })
+})
