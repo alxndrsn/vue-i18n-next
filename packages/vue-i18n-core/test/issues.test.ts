@@ -1459,7 +1459,7 @@ describe('#TODO', async () => {
 					})
 
 					it('should return true with locale', () => {
-						expect(i18n.global.t(k, en)).toEqual(true)
+						expect(i18n.global.t(k, 'en')).toEqual(true)
 					})
 				})
 				
@@ -1469,7 +1469,7 @@ describe('#TODO', async () => {
 					})
 
 					it('should return hi with locale', () => {
-						expect(i18n.global.t(k, en)).toEqual('hi')
+						expect(i18n.global.t(k, 'en')).toEqual('hi')
 					})
 				})
       })
@@ -1483,7 +1483,7 @@ describe('#TODO', async () => {
 					})
 
 					it('should return false with locale', () => {
-						expect(i18n.global.te(k, en)).toEqual(false)
+						expect(i18n.global.te(k, 'en')).toEqual(false)
 					})
 				})
 
@@ -1493,7 +1493,7 @@ describe('#TODO', async () => {
 					})
 
 					it('should return false with locale', () => {
-						expect(i18n.global.t(k, en)).toEqual(false)
+						expect(i18n.global.t(k, 'en')).toEqual(false)
 					})
 				})
       })
@@ -1514,7 +1514,7 @@ describe('#TODO', async () => {
         })
 
         it('should return true with locale', () => {
-  				expect(i18n.global.te(`a.${k}.c`, en)).toEqual(true)
+  				expect(i18n.global.te(`a.${k}.c`, 'en')).toEqual(true)
         })
       })
 
@@ -1526,7 +1526,7 @@ describe('#TODO', async () => {
         })
 
 				it('should return false with locale', () => {
-  				expect(i18n.global.te(`a.${k}.c`, en)).toEqual(false)
+  				expect(i18n.global.te(`a.${k}.c`, 'en')).toEqual(false)
         })
       })
     })
@@ -1544,7 +1544,7 @@ describe('#TODO', async () => {
         })
 
         it('should return true with locale', () => {
-  				expect(i18n.global.te(`a.${k}`, en)).toEqual(true)
+  				expect(i18n.global.te(`a.${k}`, 'en')).toEqual(true)
         })
       })
 
@@ -1556,7 +1556,7 @@ describe('#TODO', async () => {
         })
 
 				it('should return false with locale', () => {
-  				expect(i18n.global.te(`a.${k}`, en)).toEqual(false)
+  				expect(i18n.global.te(`a.${k}`, 'en')).toEqual(false)
         })
       })
     })
