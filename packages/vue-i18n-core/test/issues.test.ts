@@ -1440,7 +1440,7 @@ describe.only('#TODO', async () => {
 
   ;[
     'control', // use this for making sure the tests are written correctly
-    // '__proto__', // TODO: see __link to __proto__ issue if appropriate
+    '__proto__',
     'constructor',
     'hasOwnProperty',
     'isPrototypeOf',
