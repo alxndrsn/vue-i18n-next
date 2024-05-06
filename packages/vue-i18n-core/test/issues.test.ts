@@ -1439,7 +1439,10 @@ describe.only('#TODO', async () => {
     })
 
   ;[
-    'control', // use this for making sure the tests are written correctly
+    'control', // marke sure the tests are written correctly - all tests should pass
+    'link', // #1711
+
+    // object builtins:
     '__proto__',
     'constructor',
     'hasOwnProperty',
