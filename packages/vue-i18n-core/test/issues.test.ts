@@ -1538,9 +1538,7 @@ describe('#1838 - meaningful property names in key paths', async () => {
               const k = `${prop}.b`
 
               const i18n = i18nFor({
-                [prop]: {
-                  b: 'hi'
-                }
+                [k]: 'hi'
               })
 
               expect(i18n.global.te(k)).toEqual(true)
@@ -1552,9 +1550,7 @@ describe('#1838 - meaningful property names in key paths', async () => {
               const k = `${prop}.b`
 
               const i18n = i18nFor({
-                [prop]: {
-                  b: 'hi'
-                }
+                [k]: 'hi'
               })
 
               expect(i18n.global.t(k)).toEqual('hi')
@@ -1638,11 +1634,7 @@ describe('#1838 - meaningful property names in key paths', async () => {
               const k = `a.${prop}.c`
 
               const i18n = i18nFor({
-                a: {
-                  [prop]: {
-                    c: 'hi'
-                  }
-                }
+                [k]: 'hi'
               })
 
               expect(i18n.global.t(k)).toEqual('hi')
@@ -1722,9 +1714,7 @@ describe('#1838 - meaningful property names in key paths', async () => {
               const k = `a.${prop}`
 
               const i18n = i18nFor({
-                a: {
-                  [prop]: 'hi'
-                }
+                [k]: 'hi'
               })
 
               expect(i18n.global.t(k)).toEqual('hi')
