@@ -1429,7 +1429,7 @@ test('#1809', async () => {
   expect(i18n.global.t('hi')).toEqual('hi kazupon')
 })
 
-describe.only('#TODO', async () => {
+describe('#1838 - meaningful property names in key paths', async () => {
   const i18nFor = messages =>
     createI18n({
       locale: 'en',
