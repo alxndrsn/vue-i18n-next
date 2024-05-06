@@ -1453,7 +1453,7 @@ describe('#1838 - meaningful property names in key paths', async () => {
     'valueOf',
   ].forEach(prop => {
     describe(prop, () => {
-      describe('top-level props', () => {
+      describe('single-level props', () => {
         describe('with existing key', () => {
           describe('te()', () => {
             it('should return true', () => {
@@ -1501,8 +1501,92 @@ describe('#1838 - meaningful property names in key paths', async () => {
         })
       })
 
+      describe('top-level props', () => {
+        describe('with existing nested key', () => {
+          describe('te()', () => {
+            it('should return true', () => {
+              const k = `${prop}.b`
+
+              const i18n = i18nFor({
+                [prop]: {
+                  b: 'hi'
+                }
+              })
+
+              expect(i18n.global.te(k)).toEqual(true)
+            })
+          })
+
+          describe('t()', () => {
+            it('should return hi', () => {
+              const k = `${prop}.b`
+
+              const i18n = i18nFor({
+                [prop]: {
+                  b: 'hi'
+                }
+              })
+
+              expect(i18n.global.t(k)).toEqual('hi')
+            })
+          })
+        })
+
+        describe('with existing absolute key', () => {
+          describe('te()', () => {
+            it('should return true', () => {
+              const k = `${prop}.b`
+
+              const i18n = i18nFor({
+                [prop]: {
+                  b: 'hi'
+                }
+              })
+
+              expect(i18n.global.te(k)).toEqual(true)
+            })
+          })
+
+          describe('t()', () => {
+            it('should return hi', () => {
+              const k = `${prop}.b`
+
+              const i18n = i18nFor({
+                [prop]: {
+                  b: 'hi'
+                }
+              })
+
+              expect(i18n.global.t(k)).toEqual('hi')
+            })
+          })
+        })
+
+        describe('with not existing key', () => {
+          describe('te()', () => {
+            it('should return false', () => {
+              const k = `${prop}.b`
+
+              const i18n = i18nFor({})
+
+              expect(i18n.global.te(k)).toEqual(false)
+            })
+          })
+
+          describe('t()', () => {
+            it('should return key', () => {
+              const k = `${prop}.b`
+
+              const i18n = i18nFor({})
+
+              expect(i18n.global.t(k)).toEqual(k)
+            })
+          })
+        })
+      })
+
       describe('mid-level props', () => {
-        describe('with existing key', () => {
+        describe('with existing nested key', () => {
           describe('te()', () => {
             it('should return true', () => {
               const k = `a.${prop}.c`
@@ -1513,6 +1597,36 @@ describe('#1838 - meaningful property names in key paths', async () => {
                     c: 'hi'
                   }
                 }
+              })
+
+              expect(i18n.global.te(k)).toEqual(true)
+            })
+          })
+
+          describe('t()', () => {
+            it('should return hi', () => {
+              const k = `a.${prop}.c`
+
+              const i18n = i18nFor({
+                a: {
+                  [prop]: {
+                    c: 'hi'
+                  }
+                }
+              })
+
+              expect(i18n.global.t(k)).toEqual('hi')
+            })
+          })
+        })
+
+        describe('with existing absolute key', () => {
+          describe('te()', () => {
+            it('should return true', () => {
+              const k = `a.${prop}.c`
+
+              const i18n = i18nFor({
+                [k]: 'hi'
               })
 
               expect(i18n.global.te(k)).toEqual(true)
@@ -1560,7 +1674,7 @@ describe('#1838 - meaningful property names in key paths', async () => {
       })
 
       describe('deep props', () => {
-        describe('with existing key', () => {
+        describe('with existing nested key', () => {
           describe('te()', () => {
             it('should return true', () => {
               const k = `a.${prop}`
@@ -1569,6 +1683,34 @@ describe('#1838 - meaningful property names in key paths', async () => {
                 a: {
                   [prop]: 'hi'
                 }
+              })
+
+              expect(i18n.global.te(k)).toEqual(true)
+            })
+          })
+
+          describe('t()', () => {
+            it('should return hi', () => {
+              const k = `a.${prop}`
+
+              const i18n = i18nFor({
+                a: {
+                  [prop]: 'hi'
+                }
+              })
+
+              expect(i18n.global.t(k)).toEqual('hi')
+            })
+          })
+        })
+
+        describe('with existing absolute key', () => {
+          describe('te()', () => {
+            it('should return true', () => {
+              const k = `a.${prop}`
+
+              const i18n = i18nFor({
+                [k]: 'hi'
               })
 
               expect(i18n.global.te(k)).toEqual(true)
